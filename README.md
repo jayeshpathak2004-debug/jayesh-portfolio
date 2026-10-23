@@ -23,3 +23,10 @@ A responsive personal portfolio built with HTML, CSS, and vanilla JavaScript.
 
 ## Before publishing
 Check the project repository names and descriptions, and add a live demo link if you deploy any project. Hotel Management System repository wasn't listed in the supplied resume links, so the portfolio doesn't invent one.
+
+
+## Interactive animation and profile photo
+The hero includes a lightweight animated particle sphere, animated profile rings, pointer-responsive depth effects, and interactive tilt effects on cards. It works on GitHub Pages without a build step.
+
+### Add your photo
+Copy a portrait photo into the `assets` folder and name it `jayesh-photo.jpg`. The hero automatically uses that image; until then, it shows a JP placeholder.
