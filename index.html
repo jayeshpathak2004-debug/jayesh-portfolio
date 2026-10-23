@@ -1,67 +1,320 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#050b1a" />
-  <meta property="og:title" content="Jayesh Pathak | Developer Portfolio" />
-  <meta name="description" content="Jayesh Pathak — MCA student and aspiring software developer. Explore projects, skills, education, and contact details." />
-  <title>Jayesh Pathak | Software Developer Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Jayesh Pathak's personal portfolio — MCA student, developer and technology enthusiast.">
+  <title>Jayesh Pathak | Creative Developer</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
+
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Jayesh Pathak home"><span class="brand-mark">JP</span><span>jayesh<span class="brand-dot">.</span></span></a>
-    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false"><i data-lucide="menu"></i></button>
-    <nav class="nav-links" id="navigation">
-      <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact" class="nav-contact">Let's connect <i data-lucide="arrow-up-right"></i></a>
+  <canvas id="space-canvas" aria-hidden="true"></canvas>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <header class="navbar">
+    <a class="logo" href="#home">JP<span>.</span></a>
+
+    <button class="menu-toggle" id="menu-toggle"
+      aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
+
+    <a href="#contact" class="nav-cta">Let's Talk <span>↗</span></a>
   </header>
+
   <main>
-    <section class="hero section-wrap" id="home">
+    <section class="hero section" id="home">
       <div class="hero-copy reveal">
-        <div class="availability"><span class="status-dot"></span> OPEN TO ENTRY-LEVEL OPPORTUNITIES</div>
+        <div class="availability">
+          <span class="status-dot"></span>
+          Available for opportunities
+        </div>
+
         <p class="eyebrow">HELLO, I'M</p>
-        <h1>Jayesh<br><span>Pathak.</span></h1>
-        <h2>MCA Student <span class="muted">·</span> Aspiring Software Developer</h2>
-        <p class="hero-description">I build practical web applications that bring useful ideas to life — from student-focused discovery platforms to healthcare tools.</p>
-        <div class="hero-actions"><a class="button button-primary" href="#projects">Explore my work <i data-lucide="arrow-down-right"></i></a><a class="button button-ghost" href="mailto:jayeshpathak2004@gmail.com">Get in touch <i data-lucide="send"></i></a></div>
-        <div class="social-links"><a href="https://github.com/jayeshpathak2004-debug" target="_blank" rel="noreferrer"><i data-lucide="github"></i> GitHub</a><a href="https://www.linkedin.com/in/jayesh-pathak-ab8718329" target="_blank" rel="noreferrer"><i data-lucide="linkedin"></i> LinkedIn</a><span><i data-lucide="map-pin"></i> Nashik, Maharashtra</span></div>
+        <h1>Jayesh<br><span class="gradient-text">Pathak.</span></h1>
+
+        <h2 class="hero-role">
+          I'm a <span id="typed-text">Developer</span><span class="cursor">|</span>
+        </h2>
+
+        <p class="hero-description">
+          MCA student and aspiring software developer who loves turning
+          creative ideas into interactive digital experiences.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="button button-primary" href="#projects">
+            Explore My Work <span>↗</span>
+          </a>
+          <a class="button button-secondary" href="#contact">
+            Let's Connect <span>→</span>
+          </a>
+        </div>
+
+        <div class="social-links">
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+             aria-label="GitHub">GH</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
+             aria-label="LinkedIn">in</a>
+          <span class="social-divider"></span>
+          <span class="social-caption">Building the future, one line at a time.</span>
+        </div>
       </div>
-      <div class="hero-art reveal" aria-label="Jayesh Pathak developer portrait with animated technology background">
-        <canvas id="space-canvas" aria-hidden="true"></canvas>
-        <div class="hero-nebula"></div><div class="hero-ring hero-ring-one"></div><div class="hero-ring hero-ring-two"></div>
-        <div class="profile-orb" id="profile-orb"><div class="profile-photo-wrap"><img class="profile-photo" src="assets/jayesh-photo.jpg" alt="Jayesh Pathak"/><div class="photo-shine"></div></div></div>
-        <div class="floating-tag tag-react"><i data-lucide="atom"></i> React</div><div class="floating-tag tag-python"><i data-lucide="terminal"></i> Python</div><div class="floating-tag tag-db"><i data-lucide="database"></i> Databases</div>
-        <div class="code-window"><div class="window-top"><span></span><span></span><span></span><small>jayesh.js</small></div><div class="code-lines"><p><span class="code-purple">const</span> developer = {</p><p class="indent"><span class="code-blue">name</span>: <span class="code-green">"Jayesh Pathak"</span>,</p><p class="indent"><span class="code-blue">degree</span>: <span class="code-green">"MCA"</span>,</p><p class="indent"><span class="code-blue">focus</span>: [</p><p class="indent2"><span class="code-green">"Web Development"</span>,</p><p class="indent2"><span class="code-green">"Problem Solving"</span></p><p class="indent">],</p><p class="indent"><span class="code-blue">learning</span>: <span class="code-green">true</span></p><p>};</p><p class="code-comment">// turning ideas into applications</p><p><span class="code-purple">while</span> (curious) { build(); }</p></div></div>
+
+      <div class="hero-art reveal">
+        <div class="orbit orbit-outer"></div>
+        <div class="orbit orbit-inner"></div>
+
+        <div class="orbit-node node-one"></div>
+        <div class="orbit-node node-two"></div>
+        <div class="orbit-node node-three"></div>
+
+        <div class="portrait-frame" id="profile-orb">
+          <div class="portrait-shine"></div>
+          <img
+            src="assets/jayesh-photo.jpg"
+            alt="Portrait of Jayesh Pathak"
+            class="portrait"
+            onerror="this.style.display='none';document.getElementById('portrait-fallback').style.display='flex';"
+          >
+          <div class="portrait-fallback" id="portrait-fallback">
+            <span>JP</span>
+            <small>Add your photo to assets/jayesh-photo.jpg</small>
+          </div>
+        </div>
+
+        <div class="floating-card card-top">
+          <span class="floating-icon">&lt;/&gt;</span>
+          <div>
+            <strong>Developer</strong>
+            <small>Creative thinker</small>
+          </div>
+        </div>
+
+        <div class="floating-card card-bottom">
+          <span class="floating-icon purple-icon">✦</span>
+          <div>
+            <strong>Problem Solver</strong>
+            <small>Always learning</small>
+          </div>
+        </div>
+
+        <div class="hero-label label-left">CREATIVITY <span>+</span></div>
+        <div class="hero-label label-right">TECHNOLOGY <span>✦</span></div>
       </div>
-      <a class="scroll-cue" href="#about"><span></span> SCROLL TO EXPLORE</a>
+
+      <a class="scroll-indicator" href="#about">
+        <span class="scroll-line"></span>
+        SCROLL TO EXPLORE
+      </a>
     </section>
-    <section class="section-wrap section-block" id="about"><div class="section-heading reveal"><p class="eyebrow">01 / ABOUT ME</p><h2>Curious by nature.<br><span>Developer by practice.</span></h2></div><div class="about-grid"><div class="about-text reveal"><p>I'm a Master of Computer Applications student at <strong>K.K. Wagh Institute of Engineering Education & Research, Nashik</strong>, with a Bachelor of Computer Applications background and a CGPA of <strong>8.83</strong>.</p><p>I enjoy creating responsive interfaces, connecting applications to databases, and learning how full-stack systems work together. My academic and personal projects have helped me practise building useful software from concept to implementation.</p><p>I'm looking for an opportunity to contribute, learn from a development team, and keep growing as a software developer.</p><a class="text-link" href="#contact">Let's build something useful <i data-lucide="arrow-up-right"></i></a></div><div class="stats-grid reveal"><div class="stat-card"><span class="stat-number">8.83</span><span class="stat-label">BCA CGPA</span><i data-lucide="graduation-cap"></i></div><div class="stat-card"><span class="stat-number">03</span><span class="stat-label">Featured projects</span><i data-lucide="layers-3"></i></div><div class="stat-card"><span class="stat-number">2027</span><span class="stat-label">Expected MCA completion</span><i data-lucide="calendar-check"></i></div><div class="stat-card"><span class="stat-number">∞</span><span class="stat-label">Things to learn</span><i data-lucide="sparkles"></i></div></div></div></section>
-    <section class="section-wrap section-block" id="skills"><div class="section-heading reveal"><p class="eyebrow">02 / TOOLKIT</p><h2>Tools I work <span>with.</span></h2><p class="section-subtitle">A growing toolkit for building, connecting, and improving applications.</p></div><div class="skills-grid">
-      <article class="skill-card reveal"><div class="skill-icon"><i data-lucide="code-2"></i></div><h3>Languages</h3><div class="chips"><span>Python</span><span>JavaScript</span><span>C</span><span>C++</span><span>C#</span></div></article>
-      <article class="skill-card reveal"><div class="skill-icon"><i data-lucide="panels-top-left"></i></div><h3>Frontend</h3><div class="chips"><span>HTML</span><span>CSS</span><span>React.js</span><span>Bootstrap</span></div></article>
-      <article class="skill-card reveal"><div class="skill-icon"><i data-lucide="server"></i></div><h3>Backend</h3><div class="chips"><span>Node.js</span><span>Express.js</span><span>Django (Basic)</span><span>.NET</span></div></article>
-      <article class="skill-card reveal"><div class="skill-icon"><i data-lucide="database"></i></div><h3>Databases</h3><div class="chips"><span>MongoDB</span><span>MySQL</span><span>MS Access</span></div></article>
-      <article class="skill-card reveal"><div class="skill-icon"><i data-lucide="wrench"></i></div><h3>Tools</h3><div class="chips"><span>Git</span><span>GitHub</span><span>VS Code</span></div></article>
-    </div></section>
-    <section class="section-wrap section-block" id="projects"><div class="section-heading reveal"><p class="eyebrow">03 / SELECTED WORK</p><h2>Projects with a <span>purpose.</span></h2><p class="section-subtitle">Academic and web application projects where I put my skills into practice.</p></div><div class="projects-list">
-      <article class="project-card project-featured reveal"><div class="project-visual rent-visual"><div class="mini-browser"><div class="mini-browser-bar"><span></span><span></span><span></span><b>RentNMeal</b></div><div class="rent-ui"><div class="rent-title">Find your next <em>stay.</em></div><div class="rent-search"><i data-lucide="search"></i> PG, room or mess <span>Search</span></div><div class="rent-categories"><span>⌂ PG stays</span><span>▦ Rooms</span><span>♨ Meals</span></div><div class="rent-listings"><div><span class="listing-image listing-one"></span><b>Student PG</b><small>Budget-friendly stay</small></div><div><span class="listing-image listing-two"></span><b>Daily tiffin</b><small>Meals near you</small></div></div></div></div><span class="visual-label">FULL-STACK WEB APP</span></div><div class="project-info"><div class="project-meta"><span>FEATURED PROJECT</span><span>2026</span></div><h3>RentNMeal</h3><p class="project-subtitle">PG, Room & Mess Discovery Platform</p><p>A student-focused platform for discovering PG accommodations, rental rooms, and mess/tiffin services. Includes responsive listings, category filters, search, budget filtering, sorting, and backend APIs connected to MongoDB.</p><div class="project-tags"><span>React</span><span>Vite</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span></div><a class="project-link" href="https://github.com/jayeshpathak2004-debug/RentNMeal" target="_blank" rel="noreferrer">View repository <i data-lucide="arrow-up-right"></i></a></div></article>
-      <article class="project-card reveal"><div class="project-visual health-visual"><div class="health-cross"><i data-lucide="heart-pulse"></i></div><div class="health-wave"></div><div class="health-pill">Healthcare Chatbot</div><span class="visual-label">HEALTH TECHNOLOGY</span></div><div class="project-info"><div class="project-meta"><span>FRONTEND DEVELOPER</span><span>JAN 2026</span></div><h3>Healthcare Chatbot System</h3><p>A healthcare chatbot interface designed to provide basic health information and support symptom-analysis and prediction features, integrating frontend components with Django and MySQL.</p><div class="project-tags"><span>Python</span><span>Django</span><span>MySQL</span><span>HTML/CSS/JS</span></div><a class="project-link" href="https://github.com/jayeshpathak2004-debug/Healthcare-Chatbot-System" target="_blank" rel="noreferrer">View repository <i data-lucide="arrow-up-right"></i></a></div></article>
-      <article class="project-card reveal"><div class="project-visual hotel-visual"><div class="hotel-building"><i data-lucide="building-2"></i><span></span><span></span><span></span><span></span></div><div class="hotel-receipt"><i data-lucide="receipt-text"></i><b>Booking & Billing</b><small>Guest management</small></div><span class="visual-label">DESKTOP APPLICATION</span></div><div class="project-info"><div class="project-meta"><span>ACADEMIC PROJECT</span><span>FEB 2025</span></div><h3>Hotel Management System</h3><p>An academic desktop application for managing hotel bookings, customer records, and billing, using MS Access for data storage and Crystal Reports for report generation.</p><div class="project-tags"><span>C#</span><span>.NET</span><span>MS Access</span><span>Crystal Reports</span></div><span class="project-link project-link-muted">Repository link not listed on resume</span></div></article>
-    </div><div class="github-banner reveal"><div class="github-banner-icon"><i data-lucide="github"></i></div><div><h3>More code on GitHub</h3><p>Explore repositories, source code, and ongoing work.</p></div><a class="button button-primary" href="https://github.com/jayeshpathak2004-debug" target="_blank" rel="noreferrer">Visit GitHub <i data-lucide="arrow-up-right"></i></a></div></section>
-    <section class="section-wrap section-block" id="education"><div class="section-heading reveal"><p class="eyebrow">04 / BACKGROUND</p><h2>Education & <span>growth.</span></h2></div><div class="timeline">
-      <article class="timeline-item reveal"><div class="timeline-marker"><i data-lucide="graduation-cap"></i></div><div class="timeline-date">2025 — 2027 <span class="current-pill">IN PROGRESS</span></div><h3>Master of Computer Applications (MCA)</h3><p class="timeline-place">K.K. Wagh Institute of Engineering Education & Research · Nashik</p><p>Currently pursuing postgraduate studies in computer applications.</p></article>
-      <article class="timeline-item reveal"><div class="timeline-marker"><i data-lucide="book-open"></i></div><div class="timeline-date">2022 — 2025</div><h3>Bachelor of Computer Applications (BCA)</h3><p class="timeline-place">Pratap College · Amalner</p><p>Graduated with a CGPA of <strong>8.83</strong>.</p></article>
-    </div><div class="growth-grid"><article class="growth-card reveal"><i data-lucide="award"></i><div><h3>Certifications</h3><p>Python for Everybody — Coursera (2025)</p><p>Cyber Security Basics — Cisco Networking Academy (2025)</p></div></article><article class="growth-card reveal"><i data-lucide="briefcase-business"></i><div><h3>Industry Exposure</h3><p><strong>Wind Hans Technologies, Nashik</strong> · September 2025</p><p>Exposure to the Software Development Life Cycle (SDLC) and software development practices.</p></div></article><article class="growth-card reveal"><i data-lucide="trophy"></i><div><h3>Activities & Achievements</h3><p>MSPA Group Project Competition, K.K. Wagh Institute (2026).</p><p>Event Leader, Fantasy Fiesta (2025); inter-college cricket activities.</p></div></article></div></section>
-    <section class="contact-section" id="contact"><div class="section-wrap contact-inner reveal"><p class="eyebrow">05 / GET IN TOUCH</p><h2>Have an opportunity?<br><span>Let's talk.</span></h2><p>I'm interested in entry-level software development opportunities, internships, and collaborating on useful projects.</p><a class="button button-primary button-large" href="mailto:jayeshpathak2004@gmail.com">jayeshpathak2004@gmail.com <i data-lucide="arrow-up-right"></i></a><div class="contact-details"><a href="tel:+919325453599"><i data-lucide="phone"></i> +91 93254 53599</a><a href="https://www.linkedin.com/in/jayesh-pathak-ab8718329" target="_blank" rel="noreferrer"><i data-lucide="linkedin"></i> LinkedIn</a><a href="https://github.com/jayeshpathak2004-debug" target="_blank" rel="noreferrer"><i data-lucide="github"></i> GitHub</a></div></div></section>
+
+    <section class="section about-section" id="about">
+      <div class="section-heading reveal">
+        <p class="eyebrow">GET TO KNOW ME</p>
+        <h2>More than just <span class="gradient-text">code.</span></h2>
+        <p>A little about who I am and what drives me.</p>
+      </div>
+
+      <div class="about-grid">
+        <article class="glass-card about-card reveal">
+          <span class="card-symbol">✦</span>
+          <h3>Who I Am</h3>
+          <p>
+            I'm Jayesh Pathak, an MCA student passionate about software
+            development, web technologies and machine learning. I enjoy
+            learning by building practical projects.
+          </p>
+        </article>
+
+        <article class="glass-card about-card reveal">
+          <span class="card-symbol">⌘</span>
+          <h3>What I Do</h3>
+          <p>
+            I work with web development technologies and explore how
+            intelligent systems can solve real-world problems. I focus on
+            improving my skills through hands-on development.
+          </p>
+        </article>
+
+        <article class="glass-card about-card reveal">
+          <span class="card-symbol">↗</span>
+          <h3>My Goal</h3>
+          <p>
+            My goal is to become a skilled software professional, contribute
+            to meaningful projects and keep growing through continuous
+            learning and collaboration.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section skills-section" id="skills">
+      <div class="section-heading reveal">
+        <p class="eyebrow">MY TOOLKIT</p>
+        <h2>Skills & <span class="gradient-text">technologies.</span></h2>
+        <p>Technologies I'm learning and using to build projects.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <span class="skill-icon orange">&lt;/&gt;</span>
+          <h3>HTML & CSS</h3>
+          <p>Web structure and styling</p>
+          <div class="skill-track"><span style="width:85%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon yellow">JS</span>
+          <h3>JavaScript</h3>
+          <p>Interactive web experiences</p>
+          <div class="skill-track"><span style="width:65%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon blue">Py</span>
+          <h3>Python</h3>
+          <p>Programming and ML basics</p>
+          <div class="skill-track"><span style="width:65%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon green">DB</span>
+          <h3>Databases</h3>
+          <p>MySQL and MongoDB basics</p>
+          <div class="skill-track"><span style="width:60%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon cyan">⚛</span>
+          <h3>React</h3>
+          <p>Component-based UI development</p>
+          <div class="skill-track"><span style="width:50%"></span></div>
+        </div>
+
+        <div class="skill-card reveal">
+          <span class="skill-icon purple">ML</span>
+          <h3>Machine Learning</h3>
+          <p>Exploring predictive systems</p>
+          <div class="skill-track"><span style="width:45%"></span></div>
+        </div>
+      </div>
+      <p class="skills-note">Skill indicators are illustrative. Update them to reflect your current experience.</p>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="section-heading reveal">
+        <p class="eyebrow">SELECTED WORK</p>
+        <h2>Things I've <span class="gradient-text">built.</span></h2>
+        <p>A selection of my academic and personal projects.</p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card reveal">
+          <div class="project-visual healthcare-visual">
+            <div class="project-window">
+              <div class="window-dots"><i></i><i></i><i></i></div>
+              <div class="health-icon">✚</div>
+              <div class="mock-line wide"></div>
+              <div class="mock-line"></div>
+              <div class="mock-button"></div>
+            </div>
+            <span class="project-number">01</span>
+          </div>
+          <div class="project-content">
+            <div class="project-tags"><span>Python</span><span>Django</span><span>ML</span></div>
+            <h3>Healthcare Chatbot System</h3>
+            <p>A healthcare assistant project exploring symptom analysis and machine-learning-based disease prediction.</p>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+              View project <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-visual rent-visual">
+            <div class="rent-demo">
+              <div class="rent-demo-top"><span>RentNMeal</span><span>⌕</span></div>
+              <div class="rent-demo-image"></div>
+              <div class="mock-line wide"></div>
+              <div class="mock-line"></div>
+              <div class="rent-demo-footer"><span>PG / Room / Mess</span><span>↗</span></div>
+            </div>
+            <span class="project-number">02</span>
+          </div>
+          <div class="project-content">
+            <div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+            <h3>RentNMeal</h3>
+            <p>A room, PG and mess discovery platform concept designed to help people find accommodation and meals.</p>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+              View project <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-visual portfolio-visual">
+            <div class="portfolio-demo">
+              <span>JP.</span>
+              <div class="mock-line wide"></div>
+              <div class="mock-line"></div>
+              <div class="portfolio-demo-circle"></div>
+            </div>
+            <span class="project-number">03</span>
+          </div>
+          <div class="project-content">
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <h3>Interactive Portfolio</h3>
+            <p>A personal portfolio featuring animated visuals, responsive layouts and a futuristic interface.</p>
+            <a class="project-link" href="#home">
+              You're viewing it <span>↗</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="contact-panel reveal">
+        <div class="contact-decoration"></div>
+        <p class="eyebrow">HAVE AN IDEA?</p>
+        <h2>Let's create something<br><span class="gradient-text">meaningful.</span></h2>
+        <p>Have a project, opportunity or idea? I'd love to hear from you.</p>
+
+        <a class="button button-primary"
+           href="mailto:jayeshpathak2004@gmail.com">
+          Get in Touch <span>↗</span>
+        </a>
+
+        <div class="contact-email">jayeshpathak2004@gmail.com</div>
+      </div>
+    </section>
   </main>
-  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">JP</span><span>jayesh<span class="brand-dot">.</span></span></a><p>Designed & built with care by Jayesh Pathak.</p><a href="#home" class="back-top">Back to top ↑</a><span class="copyright">© <span id="year"></span> Jayesh Pathak</span></footer>
-  <script src="js/script.js"></script>
+
+  <footer class="footer">
+    <a class="logo" href="#home">JP<span>.</span></a>
+    <p>Designed & built with curiosity by Jayesh Pathak.</p>
+    <a href="#home" class="back-top">Back to top ↑</a>
+  </footer>
+
+  <div class="page-progress" id="page-progress"></div>
 </body>
 </html>
