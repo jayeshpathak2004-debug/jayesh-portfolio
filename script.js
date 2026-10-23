@@ -1,3 +1,14 @@
+// Animated particle field and pointer-responsive portrait depth
+(() => {
+ const canvas=document.getElementById('space-canvas'), scene=canvas?.parentElement, ctx=canvas?.getContext('2d');
+ if(!canvas||!scene||!ctx)return;
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches; let pts=[],tick=0,mx=0,my=0;
+ function resize(){const r=scene.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,r.width*d);canvas.height=Math.max(1,r.height*d);ctx.setTransform(d,0,0,d,0,0);pts=Array.from({length:90},()=>({x:(Math.random()-.5)*r.width*1.1,y:(Math.random()-.5)*r.height*1.1,z:Math.random()*180,s:.5+Math.random()*1.6,p:Math.random()*6.28}));}
+ function draw(){const w=scene.clientWidth,h=scene.clientHeight;ctx.clearRect(0,0,w,h);const ps=pts.map(p=>({x:w/2+p.x+Math.sin(tick*.006+p.p)*12+mx*15,y:h/2+p.y+Math.cos(tick*.005+p.p)*10+my*12,z:p.z,s:p.s}));for(let i=0;i<ps.length;i++){for(let j=i+1;j<ps.length;j++){const a=ps[i],b=ps[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<75){ctx.strokeStyle=`rgba(45,145,255,${(1-d/75)*.18})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}ps.forEach(p=>{ctx.beginPath();ctx.fillStyle=`rgba(${p.z%2?'65,190,255':'158,111,255'},${.2+(p.z/180)*.45})`;ctx.shadowColor='#268dff';ctx.shadowBlur=8;ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fill()});ctx.shadowBlur=0;if(!reduced){tick++;requestAnimationFrame(draw)}}
+ resize();draw();window.addEventListener('resize',()=>{resize();if(reduced)draw()},{passive:true});scene.addEventListener('pointermove',e=>{const r=scene.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;},{passive:true});
+ const orb=document.getElementById('profile-orb');scene.addEventListener('pointermove',e=>{if(!orb||innerWidth<700||reduced)return;const r=scene.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;orb.style.transform=`translate(calc(-50% + ${x*13}px),calc(-50% + ${y*10}px)) rotateY(${x*7}deg) rotateX(${-y*6}deg)`});scene.addEventListener('pointerleave',()=>{if(orb)orb.style.transform='translate(-50%,-50%)'});
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) window.lucide.createIcons();
   const toggle = document.querySelector('.menu-toggle');
@@ -14,64 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggle) { toggle.innerHTML = '<i data-lucide="menu"></i>'; if (window.lucide) window.lucide.createIcons(); }
   }));
   document.getElementById('year').textContent = new Date().getFullYear();
-  // Interactive particle sphere: lightweight canvas animation, no build tools required.
-  const canvas = document.getElementById('space-canvas');
-  const scene = canvas?.parentElement;
-  const ctx = canvas?.getContext('2d');
-  let particles = [], frame = 0, pointerX = 0, pointerY = 0;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function setupSpace() {
-    if (!canvas || !ctx || !scene) return;
-    const rect = scene.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-    canvas.height = Math.max(1, Math.floor(rect.height * dpr));
-    canvas.style.width = rect.width + 'px'; canvas.style.height = rect.height + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.max(55, Math.min(115, Math.floor(rect.width / 4)));
-    particles = Array.from({length: count}, (_, i) => {
-      const theta = Math.acos(2 * Math.random() - 1), phi = Math.random() * Math.PI * 2;
-      const radius = 95 + Math.random() * 125;
-      return {x: Math.sin(theta)*Math.cos(phi)*radius, y: Math.cos(theta)*radius, z: Math.sin(theta)*Math.sin(phi)*radius, size: .7 + Math.random()*1.7, phase: Math.random()*6.28, i};
-    });
-  }
-  function drawSpace() {
-    if (!ctx || !canvas || !scene) return;
-    const w = scene.clientWidth, h = scene.clientHeight;
-    ctx.clearRect(0, 0, w, h);
-    const angle = reducedMotion ? .25 : frame * .0025 + pointerX * .35;
-    const tilt = pointerY * .18;
-    const projected = particles.map(p => {
-      const x = p.x*Math.cos(angle) - p.z*Math.sin(angle);
-      const z = p.x*Math.sin(angle) + p.z*Math.cos(angle);
-      const y = p.y*Math.cos(tilt) - z*Math.sin(tilt);
-      const zz = p.y*Math.sin(tilt) + z*Math.cos(tilt);
-      const scale = 270 / (270 + zz);
-      return {x:w*.5+x*scale, y:h*.48+y*scale, z:zz, r:p.size*scale, a:Math.max(.12,Math.min(.8,(zz+180)/420)), i:p.i};
-    });
-    for (let i=0;i<projected.length;i++) {
-      const a=projected[i];
-      for(let j=i+1;j<projected.length;j++) {
-        const b=projected[j], dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
-        if(d<48 && Math.abs(a.z-b.z)<90) {ctx.strokeStyle=`rgba(165,243,109,${(1-d/48)*.13})`;ctx.lineWidth=.65;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
-      }
-    }
-    projected.forEach(p=>{ctx.beginPath();ctx.fillStyle=`rgba(190,255,153,${p.a})`;ctx.shadowColor='#a5f36d';ctx.shadowBlur=7;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});
-    ctx.shadowBlur=0;
-    if(!reducedMotion) frame++;
-    if(!reducedMotion) requestAnimationFrame(drawSpace);
-  }
-  setupSpace(); drawSpace();
-  window.addEventListener('resize', () => { setupSpace(); if(reducedMotion) drawSpace(); }, {passive:true});
-  scene?.addEventListener('pointermove', e => { const r=scene.getBoundingClientRect(); pointerX=((e.clientX-r.left)/r.width-.5)*2; pointerY=((e.clientY-r.top)/r.height-.5)*2; }, {passive:true});
-  scene?.addEventListener('pointerleave', () => {pointerX=0;pointerY=0;}, {passive:true});
-  const orb = document.getElementById('profile-orb');
-  scene?.addEventListener('pointermove', e => { if(!orb || window.innerWidth<700) return; const r=scene.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5; const y=(e.clientY-r.top)/r.height-.5; orb.style.transform=`translateX(calc(-50% + ${x*16}px)) translateY(${y*12}px) translateZ(65px) rotateY(${x*10}deg) rotateX(${-y*8}deg)`; });
-  scene?.addEventListener('pointerleave', () => {if(orb) orb.style.transform='translateX(-50%) translateZ(65px)';});
-  document.querySelectorAll('.project-card, .skill-card, .stat-card, .growth-card').forEach(card => {
-    card.addEventListener('pointermove', e => {if(window.innerWidth<700 || reducedMotion) return; const r=card.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5; const y=(e.clientY-r.top)/r.height-.5; card.style.transform=`perspective(900px) rotateY(${x*3.5}deg) rotateX(${-y*3.5}deg) translateY(-3px)`;});
-    card.addEventListener('pointerleave', () => {card.style.transform='';});
-  });
   const items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
